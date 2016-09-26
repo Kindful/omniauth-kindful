@@ -18,6 +18,8 @@ module OmniAuth
         ''
       end
 
+      uid { raw_info['organization']['id'] }
+
       info do
         {
           first_name: raw_info['first_name'],
