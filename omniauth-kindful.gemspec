@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["ty@kindful.com"]
   gem.description   = %q{OmniAuth strategy for Kindful.}
   gem.summary       = %q{OmniAuth strategy for Kindful.}
-  gem.homepage      = "https://github.com/delongtj/omniauth-kindful"
+  gem.homepage      = "https://github.com/Kindful/omniauth-kindful"
   gem.license       = "MIT"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
