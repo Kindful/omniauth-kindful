@@ -3,14 +3,28 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Kindful < OmniAuth::Strategies::OAuth2
+      DEFAULT_SCOPE = "basic data_add data_append data_query"
+
       option :client_options, {
         :site => 'https://www.kindful.com',
-        :authorize_url => 'http://app.lvh.me:3000/admin/oauth2/authorize',
-        :token_url => 'http://app.lvh.me:3000/admin/oauth2/token',
-        :details_url => 'http://app.lvh.me:3000/admin/oauth2/api/v1/details'
+        :authorize_url => 'https://app.kindful.com/admin/oauth2/authorize',
+        :token_url => 'https://app.kindful.coms/admin/oauth2/token',
+        :details_url => 'https://app.kindful.com/admin/oauth2/api/v1/details'
       }
 
-      def request_phase
+      option :environment, 'production'
+
+      def setup_phase
+        if options.environment == 'development' || options.environment == 'test'
+          options.client_options.authorize_url = 'http://app.lvh.me:3000/admin/oauth2/authorize'
+          options.client_options.token_url = 'http://app.lvh.me:3000/admin/oauth2/token'
+          options.client_options.details_url = 'http://app.lvh.me:3000/admin/oauth2/api/v1/details'
+        elsif options.environment == 'staging'
+          options.client_options.authorize_url = 'https://app.trail-staging.us/admin/oauth2/authorize'
+          options.client_options.token_url = 'https://app.trail-staging.us/admin/oauth2/token'
+          options.client_options.details_url = 'https://app.trail-staging.us/admin/oauth2/api/v1/details'
+        end
+
         super
       end
 
@@ -35,11 +49,7 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
-          %w[scope client_options].each do |v|
-            if request.params[v]
-              params[v.to_sym] = request.params[v]
-            end
-          end
+          params[:scope] ||= DEFAULT_SCOPE
         end
       end
 
