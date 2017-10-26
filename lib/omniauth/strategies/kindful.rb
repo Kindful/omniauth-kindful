@@ -8,7 +8,7 @@ module OmniAuth
       option :client_options, {
         :site => 'https://www.kindful.com',
         :authorize_url => 'https://app.kindful.com/admin/oauth2/authorize',
-        :token_url => 'https://app.kindful.coms/admin/oauth2/token',
+        :token_url => 'https://app.kindful.com/admin/oauth2/token',
         :details_url => 'https://app.kindful.com/admin/oauth2/api/v1/details'
       }
 
