@@ -23,6 +23,10 @@ module OmniAuth
           options.client_options.authorize_url = 'https://app.trail-staging.us/admin/oauth2/authorize'
           options.client_options.token_url = 'https://app.trail-staging.us/admin/oauth2/token'
           options.client_options.details_url = 'https://app.trail-staging.us/admin/oauth2/api/v1/details'
+        elsif options.environment == 'qa'
+          options.client_options.authorize_url = 'https://app.kindqa.com/admin/oauth2/authorize'
+          options.client_options.token_url = 'https://app.kindqa.com/admin/oauth2/token'
+          options.client_options.details_url = 'https://app.kindqa.com/admin/oauth2/api/v1/details'
         end
 
         super
