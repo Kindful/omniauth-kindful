@@ -27,6 +27,10 @@ module OmniAuth
           options.client_options.authorize_url = 'https://app.kindqa.com/admin/oauth2/authorize'
           options.client_options.token_url = 'https://app.kindqa.com/admin/oauth2/token'
           options.client_options.details_url = 'https://app.kindqa.com/admin/oauth2/api/v1/details'
+        elsif options.environment == 'playground'
+          options.client_options.authorize_url = 'https://app-playground.kindful.com/admin/oauth2/authorize'
+          options.client_options.token_url = 'https://app-playground.kindful.com/admin/oauth2/token'
+          options.client_options.details_url = 'https://app-playground.kindful.com/admin/oauth2/api/v1/details'
         end
 
         super
